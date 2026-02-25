@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Diff Bio</title>
+  <title>Development Blog — Diff Bio</title>
   <meta name="description" content="Robotics, Software, Science Development" />
 
   <link rel="stylesheet" href="style.css?v=2" />
@@ -17,7 +17,7 @@
         <span class="terminal-btn minimize"></span>
         <span class="terminal-btn maximize"></span>
       </div>
-      <div class="terminal-title">diff-bio -- blog.diff.bio</div>
+      <div class="terminal-title">diff-bio -- discover.diff.bio/blog</div>
     </div>
 
     <div class="terminal-body">
@@ -25,12 +25,15 @@
         <div class="brand">
           <p class="eyebrow">Diff Bio</p>
           <h1 class="cursor">Development Blog</h1>
-          <p>Follow along with developmental updates on Robotics, Software, and Science.</p>
+          <p>Engineering updates on the automated lab for protein functional screening.</p>
         </div>
 
         <nav aria-label="Site links">
+          <a class="post-toggle" href="/">
+            Back to Discover
+          </a>
           <a class="post-toggle" href="https://diff.bio/" target="_blank" rel="noopener">
-            Learn More - Contact Us
+            diff.bio
           </a>
         </nav>
       </header>
@@ -43,9 +46,10 @@
           </div>
         </div>
         <div class="pinned-grid">
-          <article class="post pinned-card" data-post="post-protein-dojo"></article>
-          <article class="post pinned-card" data-post="post-speed"></article>
+          <article class="post pinned-card" data-post="post-platform"></article>
           <article class="post pinned-card" data-post="post-lab-sim"></article>
+          <article class="post pinned-card" data-post="post-speed"></article>
+          <article class="post pinned-card" data-post="post-cad"></article>
         </div>
       </div>
 
@@ -56,6 +60,159 @@
               <h2>All Posts</h2>
             </div>
           </div>
+
+          <article class="post timeline-card" id="post-sds-prelim" data-tags="lab-automation" data-date="Feb 24, 2026">
+            <div class="timeline-meta">
+              <span class="timeline-dot"></span>
+              <div class="meta">
+                <span class="date">Feb 24, 2026</span>
+                <span class="tag">Lab Automation</span>
+              </div>
+            </div>
+            <h3 class="post-title">Standard Docking System: One Interface Everywhere</h3>
+
+            <p>The SDS is the core mechanical design decision in the system.</p>
+            <p>
+              Every position where a plate can rest in the lab uses the same interface: staging stations, instrument decks, storage transfer points, human intake stations. One design everywhere.
+            </p>
+            <p>
+              Why this matters: when we swap from human operators to robots, nothing else changes. The instruments don't change. The stations don't change. The orchestrator logic doesn't change. Only the thing moving the plate changes.
+            </p>
+            <p>
+              Each SDS provides three core capabilities: unique plate identification (so the system always knows which plate is where), orientation constraint (a plate can only be placed one way), and presence confirmation (the system knows a plate is correctly seated, not just nearby). Together, these auto-detect both identity and position without a separate scan step.
+            </p>
+            <p>
+              We're designing for non-standard labware too. Tubes, deep-well plates, and custom containers sit in adapter bases that present the standard SDS footprint. Everything enters the tracking system through the same path.
+            </p>
+            <p>
+              The SDS also has a standardized expansion slot for position-specific sensing, like a thermocouple at a tempering station. The base functionality is universal; the expansion slot lets us add context where it's needed without changing the core design.
+            </p>
+            <p> These CAD mockups are very early designs for an one-way latching mechniasm that enables lateral plate insertion and removal</p>
+
+            <figure>
+              <img class="media-img" src="content/sds_mockup.png" alt="Standard Docking System - preliminary CAD mockup" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/sds2.png" alt="SDS mechanical interface detail" />
+            </figure>
+
+          </article>
+
+          <article class="post timeline-card" id="post-platform" data-tags="platform" data-date="Feb 22, 2026">
+            <div class="timeline-meta">
+              <span class="timeline-dot"></span>
+              <div class="meta">
+                <span class="date">Feb 22, 2026</span>
+                <span class="tag">Platform</span>
+              </div>
+            </div>
+
+            <h3 class="post-title">Design To Data In Days, Not Weeks</h3>
+
+            <p>One interface for the entire protein engineering loop, from structure prediction to wet lab results.</p>
+            <p>
+              The platform is a single web interface where researchers go from hypothesis to physical data without switching tools. Pick a protein target, run structure inference (AlphaFold 3, Boltz-1), visually design sequence variants, then order wet lab experiments, all from the same workspace. Results come back with full provenance: expression levels, binding affinity, solubility, thermostability, version-tracked so every iteration builds on the last.
+            </p>
+            <p>
+              Structure inference is built into the platform. Researchers configure and launch prediction runs directly from the platform, then use those predictions to inform what they send to the lab. The goal is a tight loop between computational prediction and physical validation, where each round of data makes the next prediction better.
+            </p>
+            <p>
+              Ordering is designed to feel like checking out a cart, not filing a lab request. Select variants, pick assays, set parameters, submit. Under the hood, that order becomes a set of commands to the automated lab. The lab executes autonomously, and results flow back to the platform with every detail of how the data was produced.
+            </p>
+            <p>
+              These mockups represent product vision, not a production-ready interface. The lab automation work covered in the rest of this blog is what we're building first to make this possible.
+            </p>
+
+            <figure>
+              <img class="media-img" src="content/experiment_ordering.png" alt="Platform mockup -experiment ordering with variant selection, assay configuration, and cost summary" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/experimental_results.png" alt="Platform mockup -experiment results with expression, binding affinity, solubility, and thermostability across versions" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/inference_ordering.png" alt="Platform mockup -structure inference with AlphaFold 3 model selection and run configuration" />
+            </figure>
+          </article>
+
+          <article class="post timeline-card" id="post-phased" data-tags="lab-automation" data-date="Feb 20, 2026">
+            <div class="timeline-meta">
+              <span class="timeline-dot"></span>
+              <div class="meta">
+                <span class="date">Feb 20, 2026</span>
+                <span class="tag">Lab Automation</span>
+              </div>
+            </div>
+            <h3 class="post-title">Humans First, Robots Later</h3>
+
+            <p>The key architecture decision: humans do the plate transfers first. Robots come later. Same interfaces throughout.</p>
+            <p>
+              In our first deployment, all physical plate transfers are performed by human operators guided by station-mounted iPads. The orchestrator still commands instruments directly. Operators don't touch instrument controls. They move plates to the correct positions, and the system detects arrival and triggers instrument sequences automatically.
+            </p>
+            <p>
+              This works because of the Standard Docking System. Every plate only ever touches one kind of mechanical interface, whether moved by a human or a robot. When robots eventually replace human transfers, the SDS stays the same and the orchestrator's core logic stays the same. Only the actuator changes.
+            </p>
+            <p>
+              The operator workflow is straightforward: the iPad at each station shows what plate needs to go where. The operator picks up the plate (the SDS auto-detects departure), carries it to the destination, and places it down (the SDS auto-detects arrival and confirms identity). If they grab the wrong plate or go to the wrong station, the system blocks and tells them how to fix it.
+            </p>
+            <p>
+              This lets us validate the full workflow (sample intake, orchestration, instrument control, data collection, provenance) before investing in custom robotics. We prove the system works with humans, then swap in robots without redesigning anything.
+            </p>
+            <p>
+              These are early UI mockups of the iPad interface that guides operators through every step: receiving, task execution, and incident reporting.
+            </p>
+
+            <figure>
+              <img class="media-img" src="content/ipad_receive_workflow.png" alt="iPad mockup -step-by-step receiving workflow for incoming sample shipments" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/ipad_tip_refill.png" alt="iPad mockup -task guidance for tip rack refill with from/to locations and instructions" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/ipad_incident_report.png" alt="iPad mockup -incident reporting for issues the system can't detect automatically" />
+            </figure>
+          </article>
+
+          <article class="post timeline-card" id="post-orchestrator" data-tags="lab-automation" data-date="Feb 10, 2026">
+            <div class="timeline-meta">
+              <span class="timeline-dot"></span>
+              <div class="meta">
+                <span class="date">Feb 10, 2026</span>
+                <span class="tag">Lab Automation</span>
+              </div>
+            </div>
+            <h3 class="post-title">The Orchestrator</h3>
+
+            <p>The orchestrator is the software brain that runs the lab.</p>
+            <p>
+              It schedules work, tracks every plate, commands every instrument, and collects all data. It's event-driven: it builds its understanding of the lab entirely from sensor telemetry: SDS events, instrument status reports, position updates, environmental monitors. It sends commands down and receives events back up. It doesn't assume a plate has moved until sensors confirm it.
+            </p>
+            <p>
+              At the center is a world model: the orchestrator's real-time picture of the entire lab state. Robot locations, instrument status, plate positions, resource reservations, everything. Every scheduling decision is made from this model. If it detects an inconsistency (a plate appearing where none should be) it halts new dispatches and alerts the operator.
+            </p>
+            <p>
+              The execution loop runs continuously: update the world model from telemetry, find steps that are ready, reserve resources, dispatch tasks, monitor for completions and failures, advance experiment state. Multiple experiments run concurrently. While one plate is on the liquid handler, another can be retrieved from storage, and a third can be moving to the plate reader.
+            </p>
+            <p>
+              The same orchestrator code runs against both our simulation and physical hardware. The telemetry interface is the abstraction boundary. We validate logic and failure scenarios in simulation, then connect to real equipment without changing the orchestrator.
+            </p>
+            <p>
+              Every action is recorded in an immutable, tamper-evident audit trail from day one. Not a future compliance feature, a launch requirement. Every plate transfer, every protocol execution, every fault, every human intervention is timestamped and attributed to a specific actor, whether that's a human operator identified by badge or a system component. The result is complete provenance: for any piece of data the lab produces, you can trace exactly how it was generated, which instruments touched it, who handled it, and what happened along the way.
+            </p>
+            <p>
+              These are early UI mockups of the command center, the web dashboard where operators and engineers monitor the lab in real time.
+            </p>
+
+            <figure>
+              <img class="media-img" src="content/orchestrator_overview.png" alt="Command center mockup -instrument status, storage, staging stations, and active experiments at a glance" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/orchestrator_alerts.png" alt="Command center mockup -tiered alerting with critical, warning, and info severity levels" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/manual_audit_trail.png" alt="Command center mockup -immutable audit trail with actor attribution, plate-level tracking, and tamper-evident logging" />
+            </figure>
+          </article>
+
           <article class="post timeline-card" id="post-lab-sim" data-tags="lab-automation" data-date="Jan 15, 2026">
             <div class="timeline-meta">
               <span class="timeline-dot"></span>
@@ -66,38 +223,33 @@
             </div>
             <h3 class="post-title">Lab Simulation</h3>
 
-            <p>We built Maestro to de-risk lab automation orchestration before we touch hardware.</p>
+            <p>We built the simulation to prove orchestration logic works before we touch hardware.</p>
             <p>
-              The goal is simple: run workflows repeatedly, see where timing and coordination break, and fix that loop before it becomes a hardware problem.
+              It's a deterministic, tick-based engine that models the physical lab in software. Nodes (robots, stations, instruments) are small state machines that emit the same telemetry events as their physical counterparts. Because time advances in discrete ticks, we can reproduce exactly what happened from the same initial state and inputs. Same inputs, same outputs, every time.
             </p>
             <p>
-              At the core is a deterministic simulation engine that advances in fixed 100ms ticks.
-              Nodes (robots, stations, instruments) are small state machines that emit telemetry events as they execute commands.
-              Because time advances in discrete ticks, we can reproduce "exactly what happened" from the same initial state and inputs — which is ideal for performance questions and corner cases.
+              The simulation runs at configurable speed: 1x for real-time observation, 10x or 100x for rapid scenario coverage. This lets us test hundreds of workflow variations in the time it would take to run one physical experiment.
             </p>
             <p>
-              Control is event-driven.
-              The orchestrator talks to the simulation over gRPC, issues commands, and waits on telemetry (arrived, plate picked, command rejected) rather than polling or sleeping.
-              In parallel, the browser UI connects to two WebSocket streams: one for raw telemetry and one for orchestrator state.
-              That separation is intentional: it keeps the UI useful whether the backend is a simulation or real hardware.
+              The orchestrator connects to the simulation over the same interface it will use with real hardware. It doesn't know or care whether it's talking to a simulation or physical equipment. That means every orchestration bug we find in simulation is a real bug we caught before it reached the lab.
             </p>
             <p>
-              We also inject faults on purpose to test recovery behavior early, while it's cheap to fix.
-              The same control surface can later drive real systems, so this isn't throwaway code.
+              We inject faults on purpose (instrument failures, plate misidentification, command timeouts) to validate recovery behavior while it's cheap to fix. The fault handling logic we write for simulation is the same logic that runs in production.
             </p>
-            <p>Next up is expanding scenario coverage and tightening runtime metrics so we can compare changes run-to-run.</p>
+            <p>Next up is expanding scenario coverage and validating multi-experiment throughput so we understand bottlenecks before they become hardware problems.</p>
 
+            <video class="media-video" controls preload="metadata">
+              <source src="content/multi_sim.mp4" type="video/mp4" />
+              Sorry, your browser doesn't support embedded videos.
+            </video>
             <figure>
-              <img class="media-img" src="content/sim.gif" alt="Maestro simulation running a multi-robot workflow" />
+              <img class="media-img" src="content/sim_screenshot_1.png" alt="Simulation UI showing active workflow with robot positions and instrument status" />
             </figure>
             <figure>
-              <img class="media-img" src="content/sim_screenshot_1.png" alt="Simulation UI showing active operation with robot positions" />
+              <img class="media-img" src="content/faulted.png" alt="Faulted state - the orchestrator detects and flags instrument failures" />
             </figure>
             <figure>
-              <img class="media-img" src="content/faulted.png" alt="Faulted state display showing error handling" />
-            </figure>
-            <figure>
-              <img class="media-img" src="content/metrics.png" alt="Runtime metrics dashboard with timing data" />
+              <img class="media-img" src="content/metrics.png" alt="Runtime metrics dashboard tracking throughput and timing across runs" />
             </figure>
           </article>
 
@@ -112,17 +264,17 @@
             <h3 class="post-title">Protein Dojo</h3>
             <a class="pill-link" href="https://www.proteindojo.com/" target="_blank" rel="noopener">proteindojo.com</a>
 
-            <p>Protein Dojo makes protein design feel hands-on instead of "read papers and hope."</p>
+            <p>Protein Dojo is a hands-on tool for iterating on protein binder designs.</p>
             <p>
               For small teams iterating on binders, the difference is loop speed: get to a concrete design decision quickly, with enough feedback to learn what actually changed.
             </p>
             <p>
               Under the hood it's grounded in real structures.
-              You can explore an actual complex (e.g. SARS‑CoV‑2 Spike RBD bound to human ACE2) pulled from the PDB, then design against a specific interface.
+              You can explore an actual complex (e.g. SARS&#x2011;CoV&#x2011;2 Spike RBD bound to human ACE2) pulled from the PDB, then design against a specific interface.
             </p>
             <p>
-              The workflow is intentionally structured: Explore → Design → Evaluate → Submit.
-              That's where the "cool" becomes useful — you can move between 3D geometry and residue-level sequence changes without losing context.
+              The workflow follows a clear loop: Explore, Design, Evaluate, Submit.
+              You can move between 3D geometry and residue-level sequence changes without losing context.
             </p>
             <p>
               The evaluation loop is the teacher.
@@ -138,41 +290,6 @@
             </figure>
           </article>
 
-          <article class="post timeline-card" id="post-rethinking" data-tags="robotics" data-date="Jan 5, 2026">
-            <div class="timeline-meta">
-              <span class="timeline-dot"></span>
-              <div class="meta">
-                <span class="date">Jan 5, 2026</span>
-                <span class="tag">Rail Robot - Holiday Hackathon</span>
-              </div>
-            </div>
-            <h3 class="post-title">Turning A Demo Into Something Reliable</h3>
-
-            <p>We're turning a working demo into a system that's predictable under stress.</p>
-            <p>
-              Reliability is the goal: repeatable behavior, clearer failure modes, and a safety path that doesn't depend on "everything else behaving."
-            </p>
-            <p>
-              The current loop runs on a small Linux SBC because it's convenient for iteration.
-              Longer-term we'll likely split timing-critical motor control onto a dedicated controller, and keep Linux focused on the UI, logging, and coordination.
-            </p>
-            <p>
-              The architecture we're converging on is three layers:
-              hardware I/O and timing (step pulses, servo PWM, limit inputs),
-              motion planning (ramps/segments that respect the mechanics),
-              and orchestration (station state machine + traceable logs of what happened and why).
-            </p>
-            <p>
-              The key rule is non-blocking control.
-              Everything advances on a monotonic tick with explicit state transitions, so adding sensors later becomes "handle new evidence" rather than "rewrite the loop."
-            </p>
-            <p>Next up is closing the feedback gaps: station ID, lift position feedback, and a hard stop path that's independent of application logic.</p>
-
-            <figure>
-              <img class="media-img" src="content/robot_v1p1_schematic.png" alt="Control system schematic showing three-layer architecture" />
-            </figure>
-          </article>
-
           <article class="post timeline-card pinned" id="post-demo-pick" data-tags="robotics" data-date="Jan 3, 2026">
             <div class="timeline-meta">
               <span class="timeline-dot"></span>
@@ -181,22 +298,19 @@
                 <span class="tag">Rail Robot - Holiday Hackathon</span>
               </div>
             </div>
-            <h3 class="post-title">A First End To End Demo</h3>
-            <p>The cart picks up a plate, rides the rail, and drops it off — end to end.</p>
+            <h3 class="post-title">A First End-To-End Demo</h3>
+            <p>The cart picks up a plate, rides the rail, and drops it off. End to end.</p>
             <p>
               This started as a holiday hackathon build.
-              The point was to prove we can go from sketch → mechanism → control loop → repeatable motion quickly, then iterate toward robustness.
+              The point was to prove we can go from sketch to mechanism to control loop to repeatable motion quickly, then iterate toward robustness. This is how we prototype: build the simplest version that exercises the full loop, then harden.
             </p>
             <p>
-              The demo is intentionally simple: two stations, a lift, and one controller loop sequencing the whole operation.
-              That simplicity is useful because it makes changes legible — update one variable (mechanism, tuning, software) and you immediately see the effect.
+              The demo is simple on purpose: two stations, a lift, and one controller loop sequencing the whole operation.
+              That simplicity is useful because it makes changes legible: update one variable (mechanism, tuning, software) and you immediately see the effect.
             </p>
             <p>
-              Under the hood it's one SBC running a tight C++ loop: generate step pulses, shape acceleration/deceleration so motion stays smooth, and sequence a station state machine.
-              We're intentionally light on sensors right now so we can pin down the fundamentals before adding complexity.
-            </p>
-            <p>
-              The lift is a servo-driven cam with no latching and no extra feedback, which makes the next steps obvious: plate presence sensing, lift position feedback, and a safety stop path that doesn't depend on application code.
+              Under the hood it's one SBC running a tight C++ loop: generate step pulses, shape acceleration so motion stays smooth, and sequence a station state machine.
+              We're light on sensors right now so we can pin down the fundamentals before adding complexity.
             </p>
             <p>Next up is adding feedback without losing simplicity: minimal sensors, clear failure modes, and a safer stop-everything path.</p>
 
@@ -204,102 +318,6 @@
               <source src="content/speed_test_place_h264.mp4" type="video/mp4" />
               Sorry, your browser doesn't support embedded videos.
             </video>
-          </article>
-
-          <article class="post timeline-card" id="post-station" data-tags="robotics" data-date="Jan 2, 2026">
-            <div class="timeline-meta">
-              <span class="timeline-dot"></span>
-              <div class="meta">
-                <span class="date">Jan 2, 2026</span>
-                <span class="tag">Rail Robot - Holiday Hackathon</span>
-              </div>
-            </div>
-            <h3 class="post-title">A Simple Station</h3>
-
-            <p>A station is a small landing pad that makes placement predictable.</p>
-            <p>
-              The goal is repeatability: when the cart arrives, the plate lands in the same place every time, so the rest of the system can be simpler.
-            </p>
-            <p>
-              Ours is a 3D-printed part with a guiding lip and an overhang that lets the cart position a plate above the station and lower into a known target.
-              It's intentionally modular so we can place multiple stations along the rail without redesigning the system.
-            </p>
-            <p>
-              Later we can add sensing and locking, but this baseline geometry is the foundation for reliable demos and clean integration tests.
-            </p>
-            <p>Next up is adding just enough sensing to detect "plate present / plate absent" without complicating the mechanism.</p>
-
-            <figure>
-              <img class="media-img" src="content/simple_station.png" alt="3D-printed station design with guiding lip" />
-            </figure>
-          </article>
-
-          <article class="post timeline-card" id="post-cam-lift" data-tags="robotics" data-date="Jan 1, 2026">
-            <div class="timeline-meta">
-              <span class="timeline-dot"></span>
-              <div class="meta">
-                <span class="date">Jan 1, 2026</span>
-                <span class="tag">Rail Robot - Holiday Hackathon</span>
-              </div>
-            </div>
-            <h3 class="post-title">A Better Lift Mechanism</h3>
-
-            <p>We replaced a scissor lift with a compact servo-driven cam lift.</p>
-            <p>
-              The goal is controlled motion: less flex, less torque on printed parts, and a lift path that's smooth enough to keep plates stable.
-            </p>
-            <p>
-              The scissor version looked fine in CAD but flexed too much in the printed assembly and loaded the plastic in the wrong ways.
-              The cam lift is stiffer and simpler to tune because the cam profile can shape acceleration/deceleration mechanically, not just in software.
-            </p>
-            <p>
-              It's also a better base for feedback: adding a position sensor or a hard stop is straightforward compared to debugging a flexy linkage.
-            </p>
-            <p>Next up is adding lift position feedback so the controller can detect "not where expected" and react safely.</p>
-
-            <figure>
-              <img class="media-img" src="content/cam_lift.png" alt="Cam lift mechanism CAD design" />
-            </figure>
-            <figure>
-              <img class="media-img" src="content/plate_holding.jpg" alt="Cam lift holding a plate in raised position" />
-            </figure>
-          </article>
-
-          <article class="post timeline-card" id="post-wire-clean" data-tags="robotics" data-date="Dec 27, 2025">
-            <div class="timeline-meta">
-              <span class="timeline-dot"></span>
-              <div class="meta">
-                <span class="date">Dec 27, 2025</span>
-                <span class="tag">Rail Robot - Holiday Hackathon</span>
-              </div>
-            </div>
-            <h3 class="post-title">Wiring That Survives Real Life</h3>
-
-            <p>We cleaned up wiring so iteration doesn't come with a reliability tax.</p>
-            <p>
-              The goal is stable debugging: change one thing, observe the effect, and avoid introducing new failures from loose jumpers and tangled cables.
-            </p>
-            <p>
-              The breadboard era is over.
-              We moved to perfboard with headers for 12V motor power, stepper phases, and station reed switches, and routed moving wires so they can't snag during motion.
-            </p>
-            <p>
-              The bigger lesson is that moving wiring is a design problem.
-              Suspending the stepper phase wires above the rail immediately forces the right production questions (tethered cart vs. power-from-rail, where the controller should live) while keeping the demo simple.
-            </p>
-            <p>Next up is wiring and connectors that support fault isolation and safe shutdown, not just "it runs."</p>
-
-            <figure>
-              <img class="media-img" src="content/rewire.jpg" alt="Cleaned up wiring with cable management" />
-            </figure>
-
-            <p>Everything now breaks out cleanly, which makes debugging (and reconfiguring) much less painful.</p>
-            <figure>
-              <img class="media-img" src="content/board_front.jpg" alt="Perfboard front side with headers and connections" />
-            </figure>
-            <figure>
-              <img class="media-img" src="content/board_back.jpg" alt="Perfboard back side showing solder traces" />
-            </figure>
           </article>
 
           <article class="post timeline-card" id="post-speed" data-tags="robotics software" data-date="Dec 26, 2025">
@@ -312,13 +330,13 @@
             </div>
             <h3 class="post-title">Getting The Rail Moving Fast</h3>
 
-            <p>We pushed rail speed to find the real limits, not the comfortable ones.</p>
+            <p>We pushed rail speed until things started breaking to understand where the mechanical limits actually are.</p>
             <p>
               The constraint shows up quickly: aggressive acceleration creates torque that can lift the cart off the track, so mechanical design and packaging are the next wins.
             </p>
             <p>
               On the control side we split responsibilities:
-              a low-level stepper controller generates the pulse train and handles accel/decel ramps, while a higher-level position controller runs the station/direction state machine.
+              a low-level stepper controller generates the pulse train and handles accel/decel ramps, while a higher-level position controller runs the station state machine.
               That separation keeps timing predictable and makes it clear where to add feedback later.
             </p>
             <p>Next up is tightening the mechanical envelope (torque, clamping, mass distribution) so software can safely ask for more speed.</p>
@@ -329,7 +347,7 @@
             </video>
           </article>
 
-          <article class="post timeline-card" id="post-cad" data-tags="robotics" data-date="Dec 21, 2025">
+          <article class="post timeline-card" id="post-cad" data-tags="robotics" data-date="Dec 21, 2025" data-thumb="content/cad1.png">
             <div class="timeline-meta">
               <span class="timeline-dot"></span>
               <div class="meta">
@@ -337,62 +355,65 @@
                 <span class="tag">Rail Robot - Holiday Hackathon</span>
               </div>
             </div>
-            <h3 class="post-title">Arguing In 3D Before Printing</h3>
+            <h3 class="post-title">Building The Rail Robot</h3>
 
-            <p>We modeled the whole mechanism in CAD so we could trade time in software for fewer reprints.</p>
+            <p>We built a complete rail robot prototype in two weeks over the holidays, from napkin sketches to moving hardware.</p>
             <p>
-              The goal is risk reduction: catch interference, bad load paths, and packaging mistakes before the physical pile-up on the bench.
+              The idea was simple: move plates like a tiny factory line instead of a fancy robot arm. Buy metal rails, suspend them on printed stands, keep the cart's top surface dedicated to holding a plate. Everything else (controller, actuators, lift) hangs underneath so stations can overhang the track and the cart can deposit and pick up without extra mechanisms at each station.
             </p>
-            <p>
-              The rails and bearing wheels are the only truly fixed parts; almost everything else is printable.
-              Building the system as sub-assemblies made it easier to reason about actuator placement, gear rail location, and clearances before we committed to a layout.
-            </p>
-            <p>
-              CAD also surfaced constraints early.
-              Servo cable length pushed us to keep the SBC off-cart for initial testing, and the first scissor lift load path made it clear we needed a redesign to reduce torque on printed parts.
-            </p>
-            <p>Next up is iterating the packaging so the mechanical stack and wiring routes support reliable motion, not just first-time assembly.</p>
 
             <figure>
-              <img class="media-img" src="content/cad1.png" alt="CAD assembly view of complete rail robot" />
+              <img class="media-img" src="content/sketch1.png" alt="Initial concept sketch -cart and rail layout" />
             </figure>
             <figure>
-              <img class="media-img" src="content/cad2.png" alt="CAD detail of cart mechanism" />
+              <img class="media-img" src="content/sketch2.png" alt="Early lift mechanism sketch with spooling concept" />
+            </figure>
+
+            <p>
+              We modeled the full mechanism in CAD before printing anything to catch interference, bad load paths, and packaging mistakes before the physical pile-up on the bench. The rails and bearing wheels are the only fixed parts; almost everything else is printable. Building the system as sub-assemblies made it easier to reason about actuator placement, gear rail location, and clearances before committing to a layout.
+            </p>
+
+            <figure>
+              <img class="media-img" src="content/cad1.png" alt="CAD assembly -complete rail robot" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/cad2.png" alt="CAD detail -cart mechanism and lift" />
             </figure>
             <figure>
               <img class="media-img" src="content/cad3.png" alt="CAD exploded view showing sub-assemblies" />
             </figure>
-          </article>
 
-          <article class="post timeline-card" id="post-sketches" data-tags="robotics" data-date="Dec 18, 2025">
-            <div class="timeline-meta">
-              <span class="timeline-dot"></span>
-              <div class="meta">
-                <span class="date">Dec 18, 2025</span>
-                <span class="tag">Rail Robot - Holiday Hackathon</span>
-              </div>
-            </div>
-            <h3 class="post-title">The First Sketches</h3>
-
-            <p>The original idea: move plates like a tiny factory line instead of a fancy robot arm.</p>
             <p>
-              The goal was to learn fast: validate the motion system and handoff mechanics before we invest in a more complex automation layout.
+              The lift mechanism went through two iterations. The first scissor lift looked fine in CAD but flexed too much in the printed assembly and loaded the plastic in the wrong ways. We replaced it with a compact servo-driven cam lift. Stiffer, simpler to tune, and a better base for adding position feedback later.
             </p>
-            <p>
-              The plan was straightforward: buy metal rails, suspend them on printed stands, and keep the cart's top surface dedicated to holding a plate.
-              Everything else (controller, actuators, lift) hangs underneath so stations can overhang the track and the cart can deposit/pick up without extra mechanisms at each station.
-            </p>
-            <p>
-              The earliest lift concept was a spooling/scissor setup.
-              It got us moving quickly and surfaced the real constraints early: torque, rigidity, and cable management.
-            </p>
-            <p>Next up is turning the sketches into CAD so we can converge on a printable, assemblable stack.</p>
 
             <figure>
-              <img class="media-img" src="content/sketch1.png" alt="Initial rail robot concept sketch showing cart and rail layout" />
+              <img class="media-img" src="content/cam_lift.png" alt="Cam lift mechanism -compact servo-driven design" />
             </figure>
             <figure>
-              <img class="media-img" src="content/sketch2.png" alt="Early lift mechanism sketch with spooling concept" />
+              <img class="media-img" src="content/plate_holding.jpg" alt="Cam lift holding a plate in raised position" />
+            </figure>
+
+            <p>
+              Stations are landing pads that make plate placement predictable: when the cart arrives, the plate lands in the same place every time. This is the early physical prototype for what became our Standard Docking System concept. The same principle now drives every plate position in the lab architecture.
+            </p>
+
+            <figure>
+              <img class="media-img" src="content/simple_station.png" alt="3D-printed station prototype with guiding lip for repeatable plate placement" />
+            </figure>
+
+            <p>
+              We also learned that wiring is a design problem, not an afterthought. Moving from breadboard to perfboard with proper headers and routing eliminated a whole class of debugging headaches. Suspending the stepper phase wires above the rail immediately forces the right production questions (tethered cart vs. power-from-rail, where the controller should live) while keeping the demo simple.
+            </p>
+
+            <figure>
+              <img class="media-img" src="content/rewire.jpg" alt="Cleaned up wiring with cable management" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/board_front.jpg" alt="Perfboard front side with headers and connections" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/board_back.jpg" alt="Perfboard back side showing solder traces" />
             </figure>
           </article>
         </main>
@@ -588,7 +609,10 @@
         const titleText = source.querySelector(".post-title")?.textContent?.trim() || "";
         const firstParagraph = source.querySelector("p");
         const summaryText = firstParagraph ? getSummaryText(firstParagraph.textContent) : "";
-        const media = source.querySelector("img, video");
+        const thumbSrc = source.dataset.thumb;
+        const media = thumbSrc
+          ? source.querySelector(`img[src="${thumbSrc}"]`) || source.querySelector("img, video")
+          : source.querySelector("img, video");
 
         card.innerHTML = "";
 
@@ -700,12 +724,21 @@
         toggle.className = "post-toggle";
         toggle.textContent = "Read More";
         toggle.setAttribute("aria-expanded", "false");
-        toggle.addEventListener("click", () => {
+        toggle.addEventListener("click", (e) => {
+          e.stopPropagation();
           const expanded = post.classList.toggle("expanded");
           toggle.textContent = expanded ? "Read Less" : "Read More";
           toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
         });
         post.appendChild(toggle);
+
+        post.addEventListener("click", (e) => {
+          const target = e.target;
+          if (target.closest("a, button, img, video, .post-toggle")) return;
+          const expanded = post.classList.toggle("expanded");
+          toggle.textContent = expanded ? "Read Less" : "Read More";
+          toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+        });
       });
     };
 
