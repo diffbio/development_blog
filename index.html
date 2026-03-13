@@ -46,10 +46,10 @@
           </div>
         </div>
         <div class="pinned-grid">
+          <article class="post pinned-card pinned-latest" data-post="latest"></article>
           <article class="post pinned-card" data-post="post-platform"></article>
           <article class="post pinned-card" data-post="post-lab-sim"></article>
           <article class="post pinned-card" data-post="post-speed"></article>
-          <article class="post pinned-card" data-post="post-cad"></article>
         </div>
       </div>
 
@@ -60,6 +60,43 @@
               <h2>All Posts</h2>
             </div>
           </div>
+
+          <article class="post timeline-card" id="post-cici" data-tags="lab-automation" data-date="Mar 13, 2026">
+            <div class="timeline-meta">
+              <span class="timeline-dot"></span>
+              <div class="meta">
+                <span class="date">Mar 13, 2026</span>
+                <span class="tag">Lab Automation</span>
+              </div>
+            </div>
+            <h3 class="post-title">CiCi: The Operator Interface, For Real This Time</h3>
+
+            <p>CiCi is the first working prototype of the iPad interface that walks operators through lab tasks.</p>
+            <p>
+              We showed early mockups of this concept in our phased deployment post: static screens illustrating how an operator might receive tasks, follow steps, and report problems. CiCi is those mockups turned into software you can actually tap through. It's simple, but it runs, and an operator can walk through a toy assay end to end.
+            </p>
+            <p>
+              The flow is task-based. The operator sees what needs to happen next (e.g., "Acquire DNA Plate"), accepts the task, and gets a step-by-step breakdown: go to Bay A23, scan plate P294, confirm identity. Each scan step validates that the operator picked up the right plate before letting them proceed. If the scan doesn't match what the system expects, the task blocks.
+            </p>
+            <p>
+              Right now the QR codes are scanned off a screen, But the pattern is real: the system tells the operator exactly what to do, the operator confirms each action with a physical scan, and the system only advances when identity is verified. This is the same verification loop that the Standard Docking System will handle automatically once hardware is in place. CiCi lets us test the operator/human logic now, without waiting for that hardware.
+            </p>
+            <p>
+              Part of the point here is showing scientists that the current workflow has room to improve even without robots. A dead simple app that tells you which plate to grab, confirms you grabbed the right one, and won't let you proceed until you did — that alone eliminates a class of human errors that labs live with today. You don't need a robotic arm to stop someone from putting plate P294 in the wrong bay. You just need a screen and a scanner.
+            </p>
+            <p>Next up is getting operators to use CiCi against toy protocols and feeding what we learn into dynamic assay generation, where the system builds task sequences from assay definitions instead of hardcoded steps.</p>
+
+            <video class="media-video" controls preload="metadata">
+              <source src="content/cici_demo.mp4" type="video/mp4" />
+              Sorry, your browser doesn't support embedded videos.
+            </video>
+            <figure>
+              <img class="media-img" src="content/accept_task.jpg" alt="CiCi task card - operator sees 'Acquire DNA Plate' with priority, ETA, and required equipment before accepting" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/plate_task.jpg" alt="CiCi step execution - operator directed to Bay A23 to scan plate P294 with identity verification" />
+            </figure>
+          </article>
 
           <article class="post timeline-card" id="post-sds-prelim" data-tags="lab-automation" data-date="Feb 24, 2026">
             <div class="timeline-meta">
@@ -593,9 +630,15 @@
     const getSummaryText = (text) => truncateAtWord(getFirstSentence(text), SUMMARY_MAX_CHARS);
 
     const populatePinnedPosts = () => {
+      // Resolve "latest" to the first (newest) post in the feed
+      const newestPost = document.querySelector(".feed .timeline-card[id]");
       const pinnedCards = Array.from(document.querySelectorAll(".pinned-card[data-post]"));
       pinnedCards.forEach((card) => {
-        const targetId = card.dataset.post;
+        let targetId = card.dataset.post;
+        if (targetId === "latest" && newestPost) {
+          targetId = newestPost.id;
+          card.dataset.post = targetId;
+        }
         if (!targetId) return;
         const source = document.getElementById(targetId);
         if (!source) return;
@@ -612,6 +655,13 @@
           : source.querySelector("img, video");
 
         card.innerHTML = "";
+
+        if (card.classList.contains("pinned-latest")) {
+          const badge = document.createElement("span");
+          badge.className = "latest-badge";
+          badge.textContent = "LATEST";
+          card.appendChild(badge);
+        }
 
         const metaWrap = document.createElement("div");
         metaWrap.className = "meta";

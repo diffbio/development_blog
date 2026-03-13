@@ -191,6 +191,7 @@ nav {
 .pinned-area {
   border: 1px solid var(--border);
   background: var(--panel);
+  overflow: visible;
 }
 
 .section-head {
@@ -212,7 +213,8 @@ nav {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 16px;
-  padding: 16px;
+  padding: 20px 16px;
+  overflow: visible;
 }
 
 .pinned-card {
@@ -222,6 +224,38 @@ nav {
 }
 .pinned-card:hover {
   border-color: var(--accent);
+}
+
+.pinned-latest {
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+  outline: 1px solid var(--success);
+  outline-offset: -1px;
+}
+.pinned-latest:hover {
+  border-color: var(--card);
+}
+
+.latest-badge {
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  padding: 3px 10px;
+  background: var(--bg);
+  border: 1px solid var(--success);
+  color: var(--success);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+.latest-badge::before {
+  content: "> ";
+  color: var(--success);
+}
+.latest-badge::after {
+  content: " _";
+  animation: blink 1s step-end infinite;
 }
 
 .pinned-media {
