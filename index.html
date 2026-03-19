@@ -61,6 +61,50 @@
             </div>
           </div>
 
+          <article class="post timeline-card" id="post-cici-templates" data-tags="lab-automation" data-date="Mar 19, 2026">
+            <div class="timeline-meta">
+              <span class="timeline-dot"></span>
+              <div class="meta">
+                <span class="date">Mar 19, 2026</span>
+                <span class="tag">Lab Automation</span>
+              </div>
+            </div>
+            <h3 class="post-title">CiCi Grows Up: From Prototype to Protocol Engine</h3>
+
+            <p>One week ago we showed CiCi as a tap-through checklist. Today it's a protocol engine that scientists can actually author for themselves.</p>
+            <p>
+              The original prototype proved one thing: an operator could follow guided steps on a screen and verify each action with a barcode scan. Useful, but rigid. Every protocol was hardcoded. If you wanted to run a different assay, someone had to write new steps in code. That's fine for a demo, but it's not fine for a product.
+            </p>
+            <p>
+              The new version flips this. Scientists create their own protocol templates using plain-language steps with variable placeholders like <code>Retrieve {dna_plate} from the {20C Fridge}</code>, and the system handles the rest. Each variable is typed: a Plate, a Fridge, a volume in mL. When an operator runs the protocol, CiCi resolves those variables against real lab inventory, validates inputs, and enforces the right units. No one has to touch code. No one has to ask engineering to add a new workflow.
+            </p>
+            <p>
+              Typed variables aren't just cosmetic. They enable conditional logic: steps that gate on measured values, equipment state, or whether a previous timer has been dismissed. A step like "proceed only if water_level > 50 mL" becomes possible because the system knows water_level is a number measured in milliliters, not a free-text string someone typed. Guard rails that feel invisible to the operator but prevent an entire class of protocol errors.
+            </p>
+            <p>
+              Speaking of timers: we built a full reminder and timer system, and it lives on the server rather than in a browser tab. Incubation steps create countdown timers that persist across devices, survive closed tabs, and sync between multiple operators viewing the same run. Subsequent steps can gate on timer dismissal, so the protocol won't advance past "wait for incubation" until the timer actually fires and the operator acknowledges it. Every scientist we've talked to juggles multiple timed steps across multiple experiments with phone alarms and sticky notes. This alone makes CiCi more useful than a paper notebook.
+            </p>
+            <p>
+              Every action during a run (step completions, variable assignments, reminder events, equipment scans) is recorded in an immutable activity log with second-level timestamps. This isn't a feature we plan to add for compliance later. Data provenance is a day-one concern. The audit trail serves everyone: operators reviewing what they did, PIs verifying that a protocol was followed correctly, and eventually regulators who need complete traceability from sample to result.
+            </p>
+            <p>
+              Here's the strategic insight: we don't have to wait for the fully orchestrated robotic lab to start transforming how labwork gets done. CiCi as a standalone protocol tool is immediately useful to anyone running repeatable procedures in academic labs, core facilities, and teaching labs. We're planning to release it as a free tool on the Diff Bio platform, with a paid tier for teams that want to share templates across a group. It gets people onto the platform, it generates real-world feedback on protocol design, and it's directionally correct for what we're building. The human-machine interface is a critical stepping stone toward having machines run everything. You have to nail the human side first.
+            </p>
+            <p>
+              We're approaching friendly labs in the coming weeks for preliminary ergonomic feedback. The goal isn't to validate the technology, it works. The goal is to watch scientists use it and learn what we got wrong about the workflow before we open it up more broadly.
+            </p>
+
+            <figure>
+              <img class="media-img" src="content/cici1.png" alt="CiCi guided run mode with inline variable filling and server-persisted reminders" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/cici2.png" alt="CiCi template editor with typed variable placeholders for lab equipment, values, and inventory" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/cici3.png" alt="CiCi activity log showing immutable audit trail with second-level timestamps" />
+            </figure>
+          </article>
+
           <article class="post timeline-card" id="post-cici" data-tags="lab-automation" data-date="Mar 12, 2026">
             <div class="timeline-meta">
               <span class="timeline-dot"></span>
