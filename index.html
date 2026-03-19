@@ -61,7 +61,7 @@
             </div>
           </div>
 
-          <article class="post timeline-card" id="post-cici-templates" data-tags="lab-automation" data-date="Mar 19, 2026">
+          <article class="post timeline-card" id="post-cici" data-tags="lab-automation" data-date="Mar 19, 2026">
             <div class="timeline-meta">
               <span class="timeline-dot"></span>
               <div class="meta">
@@ -69,29 +69,29 @@
                 <span class="tag">Lab Automation</span>
               </div>
             </div>
-            <h3 class="post-title">CiCi Grows Up: From Prototype to Protocol Engine</h3>
+            <h3 class="post-title">CiCi: From Prototype to Protocol Engine</h3>
 
-            <p>One week ago we showed CiCi as a tap-through checklist. Today it's a protocol engine that scientists can actually author for themselves.</p>
+            <p>CiCi started as a guided checklist for lab operators. It's now a protocol engine that scientists can author, run, and audit themselves.</p>
             <p>
-              The original prototype proved one thing: an operator could follow guided steps on a screen and verify each action with a barcode scan. Useful, but rigid. Every protocol was hardcoded. If you wanted to run a different assay, someone had to write new steps in code. That's fine for a demo, but it's not fine for a product.
+              The first version was straightforward: an operator sees a task ("Acquire DNA Plate"), accepts it, and follows step-by-step instructions with barcode verification at each stage. If the scanned plate doesn't match what the system expects, the task blocks. You don't need a robotic arm to stop someone from putting plate P294 in the wrong bay. You just need a screen and a scanner.
             </p>
             <p>
-              The new version flips this. Scientists create their own protocol templates using plain-language steps with variable placeholders like <code>Retrieve {dna_plate} from the {20C Fridge}</code>, and the system handles the rest. Each variable is typed: a Plate, a Fridge, a volume in mL. When an operator runs the protocol, CiCi resolves those variables against real lab inventory, validates inputs, and enforces the right units. No one has to touch code. No one has to ask engineering to add a new workflow.
+              That prototype validated the core interaction loop, but every protocol was hardcoded. With this new standalone varient of the tool, scientists create their own protocol templates using plain-language steps with variable placeholders like <code>Retrieve {dna_plate} from the {20C Fridge}</code>, and the system handles the rest. Each variable is typed: a Plate, a Fridge, a volume in mL. When an operator runs the protocol, CiCi resolves those variables against real lab inventory, validates inputs, and enforces the correct units. No one touches code to add a new workflow.
             </p>
             <p>
-              Typed variables aren't just cosmetic. They enable conditional logic: steps that gate on measured values, equipment state, or whether a previous timer has been dismissed. A step like "proceed only if water_level > 50 mL" becomes possible because the system knows water_level is a number measured in milliliters, not a free-text string someone typed. Guard rails that feel invisible to the operator but prevent an entire class of protocol errors.
+              Typed variables enable conditional logic: steps that gate on measured values, equipment state, or whether a previous timer has been dismissed. A step like "proceed only if water_level > 50 mL" works because the system knows water_level is a number measured in milliliters, not a free-text string. Guard rails that feel invisible to the operator but prevent an entire class of protocol errors.
             </p>
             <p>
-              Speaking of timers: we built a full reminder and timer system, and it lives on the server rather than in a browser tab. Incubation steps create countdown timers that persist across devices, survive closed tabs, and sync between multiple operators viewing the same run. Subsequent steps can gate on timer dismissal, so the protocol won't advance past "wait for incubation" until the timer actually fires and the operator acknowledges it. Every scientist we've talked to juggles multiple timed steps across multiple experiments with phone alarms and sticky notes. This alone makes CiCi more useful than a paper notebook.
+              We also built a full reminder and timer system that lives on the server rather than in a browser tab. Incubation steps create countdown timers that persist across devices, survive closed tabs, and sync between multiple operators viewing the same run. Subsequent steps can gate on timer dismissal, so the protocol won't advance past "wait for incubation" until the timer fires and the operator acknowledges it. Every scientist we've talked to juggles multiple timed steps across multiple experiments with phone alarms and sticky notes. This alone makes CiCi more useful than a paper notebook.
             </p>
             <p>
-              Every action during a run (step completions, variable assignments, reminder events, equipment scans) is recorded in an immutable activity log with second-level timestamps. This isn't a feature we plan to add for compliance later. Data provenance is a day-one concern. The audit trail serves everyone: operators reviewing what they did, PIs verifying that a protocol was followed correctly, and eventually regulators who need complete traceability from sample to result.
+              Every action during a run (step completions, variable assignments, reminder events, equipment scans) is recorded in an immutable activity log with second-level timestamps. Data provenance is a day-one concern, not something we plan to add later. The audit trail serves operators reviewing their work, PIs verifying protocol compliance, and eventually regulators who need complete traceability from sample to result.
             </p>
             <p>
-              Here's the strategic insight: we don't have to wait for the fully orchestrated robotic lab to start transforming how labwork gets done. CiCi as a standalone protocol tool is immediately useful to anyone running repeatable procedures in academic labs, core facilities, and teaching labs. We're planning to release it as a free tool on the Diff Bio platform, with a paid tier for teams that want to share templates across a group. It gets people onto the platform, it generates real-world feedback on protocol design, and it's directionally correct for what we're building. The human-machine interface is a critical stepping stone toward having machines run everything. You have to nail the human side first.
+              CiCi exists in two forms going forward. As a standalone tool, it's immediately useful to anyone running repeatable procedures in academic labs, core facilities, and teaching labs. We plan to release it as a free tool on the Diff Bio platform, with a paid tier for teams that want to share templates. As an orchestrator-driven interface, it becomes the human-machine bridge in our automated lab, where the system assigns tasks and operators execute them with the same verification and audit infrastructure. Both versions should share the same codebase and the same philosophy: every action verified, every action recorded.
             </p>
             <p>
-              We're approaching friendly labs in the coming weeks for preliminary ergonomic feedback. The goal isn't to validate the technology, it works. The goal is to watch scientists use it and learn what we got wrong about the workflow before we open it up more broadly.
+              We want to approach friendly labs in the coming weeks for ergonomic feedback. The protocol engine works. Now we need to watch scientists use it and learn what we got wrong about the workflow.
             </p>
 
             <figure>
@@ -103,77 +103,16 @@
             <figure>
               <img class="media-img" src="content/cici3.png" alt="CiCi activity log showing immutable audit trail with second-level timestamps" />
             </figure>
-          </article>
-
-          <article class="post timeline-card" id="post-cici" data-tags="lab-automation" data-date="Mar 12, 2026">
-            <div class="timeline-meta">
-              <span class="timeline-dot"></span>
-              <div class="meta">
-                <span class="date">Mar 12, 2026</span>
-                <span class="tag">Lab Automation</span>
-              </div>
-            </div>
-            <h3 class="post-title">CiCi: The Operator Interface, For Real This Time</h3>
-
-            <p>CiCi is the first working prototype of the iPad interface that walks operators through lab tasks.</p>
-            <p>
-              We showed early mockups of this concept in our phased deployment post: static screens illustrating how an operator might receive tasks, follow steps, and report problems. CiCi is those mockups turned into software you can actually tap through. It's simple, but it runs, and an operator can walk through a toy assay end to end.
-            </p>
-            <p>
-              The flow is task-based. The operator sees what needs to happen next (e.g., "Acquire DNA Plate"), accepts the task, and gets a step-by-step breakdown: go to Bay A23, scan plate P294, confirm identity. Each scan step validates that the operator picked up the right plate before letting them proceed. If the scan doesn't match what the system expects, the task blocks.
-            </p>
-            <p>
-              Right now the QR codes are scanned off a screen, But the pattern is real: the system tells the operator exactly what to do, the operator confirms each action with a physical scan, and the system only advances when identity is verified. This is the same verification loop that the Standard Docking System will handle automatically once hardware is in place. CiCi lets us test the operator/human logic now, without waiting for that hardware.
-            </p>
-            <p>
-              Part of the point here is showing scientists that the current workflow has room to improve even without robots. A dead simple app that tells you which plate to grab, confirms you grabbed the right one, and won't let you proceed until you did — that alone eliminates a class of human errors that labs live with today. You don't need a robotic arm to stop someone from putting plate P294 in the wrong bay. You just need a screen and a scanner.
-            </p>
-            <p>Next up is getting operators to use CiCi against toy protocols and feeding what we learn into dynamic assay generation, where the system builds task sequences from assay definitions instead of hardcoded steps.</p>
-
             <video class="media-video" controls preload="metadata">
               <source src="content/cici_demo.mp4" type="video/mp4" />
               Sorry, your browser doesn't support embedded videos.
             </video>
             <figure>
-              <img class="media-img" src="content/accept_task.jpg" alt="CiCi task card - operator sees 'Acquire DNA Plate' with priority, ETA, and required equipment before accepting" />
+              <img class="media-img" src="content/accept_task.jpg" alt="CiCi task acceptance with priority, ETA, and required equipment" />
             </figure>
             <figure>
-              <img class="media-img" src="content/plate_task.jpg" alt="CiCi step execution - operator directed to Bay A23 to scan plate P294 with identity verification" />
+              <img class="media-img" src="content/plate_task.jpg" alt="CiCi step execution with barcode identity verification" />
             </figure>
-          </article>
-
-          <article class="post timeline-card" id="post-sds-prelim" data-tags="lab-automation" data-date="Feb 24, 2026">
-            <div class="timeline-meta">
-              <span class="timeline-dot"></span>
-              <div class="meta">
-                <span class="date">Feb 24, 2026</span>
-                <span class="tag">Lab Automation</span>
-              </div>
-            </div>
-            <h3 class="post-title">Standard Docking System: One Interface Everywhere</h3>
-
-            <p>The standard dock is the core mechanical design decision in the system.</p>
-            <p>
-              Every position where a plate can rest in the lab uses the same interface: staging stations, instrument decks, storage transfer points, human intake stations. One design everywhere.
-            </p>
-            <p>
-              Why this matters: when we swap from human operators to robots, nothing else changes. The instruments don't change. The stations don't change. The orchestrator logic doesn't change. Only the thing moving the plate changes.
-            </p>
-            <p>
-              Each SDS provides three core capabilities: unique plate identification (so the system always knows which plate is where), orientation constraint (a plate can only be placed one way), and presence confirmation (the system knows a plate is correctly seated, not just nearby). Together, these auto-detect both identity and position without a separate scan step.
-            </p>
-            <p>
-              We're designing for non-standard labware too. Tubes, deep-well plates, and custom containers sit in adapter bases that present the standard SDS footprint. Everything enters the tracking system through the same path.
-            </p>
-            <p>
-              The SDS also has a standardized expansion slot for position-specific sensing, like a thermocouple at a tempering station. The base functionality is universal; the expansion slot lets us add context where it's needed without changing the core design.
-            </p>
-            <p> These CAD mockups are very early designs for an one-way latching mechniasm that enables lateral plate insertion and removal</p>
-
-            <figure>
-              <img class="media-img" src="content/nfc_qr_code.png" alt="Standard Docking System - preliminary CAD mockup" />
-            </figure>
-
           </article>
 
           <article class="post timeline-card" id="post-platform" data-tags="platform" data-date="Feb 22, 2026">
@@ -185,30 +124,30 @@
               </div>
             </div>
 
-            <h3 class="post-title">Design To Data In Days, Not Weeks</h3>
+            <h3 class="post-title">Design To Data In Days, Not Weeks (Mockup)</h3>
 
-            <p>One interface for the entire protein engineering loop, from structure prediction to wet lab results.</p>
+            <p>One interface concept for the entire protein engineering loop, from structure prediction to wet lab results.</p>
             <p>
-              The platform is a single web interface where researchers go from hypothesis to physical data without switching tools. Pick a protein target, run structure inference (AlphaFold 3, Boltz-1), visually design sequence variants, then order wet lab experiments, all from the same workspace. Results come back with full provenance: expression levels, binding affinity, solubility, thermostability, version-tracked so every iteration builds on the last.
+              The platform is targetting a single web interface where researchers go from hypothesis to physical data without switching tools. Pick a protein target, run structure inference (AlphaFold 3, Boltz-1), visually design sequence variants, then order wet lab experiments, all from the same workspace. Results come back with full provenance: expression levels, binding affinity, solubility, thermostability, version-tracked so every iteration builds on the last.
             </p>
             <p>
-              Structure inference is built into the platform. Researchers configure and launch prediction runs directly from the platform, then use those predictions to inform what they send to the lab. The goal is a tight loop between computational prediction and physical validation, where each round of data makes the next prediction better.
+              Structure inference is built into the platform. Researschers configure and launch prediction runs directly, then use those predictions to inform what they send to the lab. The goal is a tight loop between computational prediction and physical validation, where each round of data makes the next prediction better.
             </p>
             <p>
               Ordering is designed to feel like checking out a cart, not filing a lab request. Select variants, pick assays, set parameters, submit. Under the hood, that order becomes a set of commands to the automated lab. The lab executes autonomously, and results flow back to the platform with every detail of how the data was produced.
             </p>
             <p>
-              These mockups represent product vision, not a production-ready interface. The lab automation work covered in the rest of this blog is what we're building first to make this possible.
+              These mockups represent the north star for the platform experience. The lab automation work covered in the rest of this blog is what makes it possible.
             </p>
 
             <figure>
-              <img class="media-img" src="content/experiment_ordering.png" alt="Platform mockup -experiment ordering with variant selection, assay configuration, and cost summary" />
+              <img class="media-img" src="content/experiment_ordering.png" alt="Platform concept for experiment ordering with variant selection, assay configuration, and cost summary" />
             </figure>
             <figure>
-              <img class="media-img" src="content/experimental_results.png" alt="Platform mockup -experiment results with expression, binding affinity, solubility, and thermostability across versions" />
+              <img class="media-img" src="content/experimental_results.png" alt="Platform concept for experiment results with expression, binding affinity, solubility, and thermostability across versions" />
             </figure>
             <figure>
-              <img class="media-img" src="content/inference_ordering.png" alt="Platform mockup -structure inference with AlphaFold 3 model selection and run configuration" />
+              <img class="media-img" src="content/inference_ordering.png" alt="Platform concept for structure inference with AlphaFold 3 model selection and run configuration" />
             </figure>
           </article>
 
@@ -220,33 +159,39 @@
                 <span class="tag">Lab Automation</span>
               </div>
             </div>
-            <h3 class="post-title">Humans First, Robots Later</h3>
+            <h3 class="post-title">Humans First, Robots Later (Mockup)</h3>
 
-            <p>The key architecture decision: humans do the plate transfers first. Robots come later. Same interfaces throughout.</p>
+            <p>The key architecture decision: humans do the plate transfers first. Robots come later. The interfaces stay the same throughout.</p>
             <p>
-              In our first deployment, all physical plate transfers are performed by human operators guided by station-mounted iPads. The orchestrator still commands instruments directly. Operators don't touch instrument controls. They move plates to the correct positions, and the system detects arrival and triggers instrument sequences automatically.
+              In our first deployment, all physical plate transfers are performed by human operators guided by CiCi on station-mounted tablets. The orchestrator commands instruments directly. Operators don't touch instrument controls. They move plates to the correct positions, and the system detects arrival and triggers instrument sequences automatically.
             </p>
             <p>
-              This works because of the Standard Docking System. Every plate only ever touches one kind of mechanical interface, whether moved by a human or a robot. When robots eventually replace human transfers, the SDS stays the same and the orchestrator's core logic stays the same. Only the actuator changes.
+              This works because of the Standard Dock. Every position where a plate can rest in the lab uses the same mechanical interface: staging stations, instrument decks, storage transfer points, human intake stations. One design everywhere. Each dock provides three core capabilities: unique plate identification (the system always knows which plate is where), orientation constraint (a plate can only be placed one way), and presence confirmation (the system knows a plate is correctly seated, not just nearby). Together, these auto-detect both identity and position without a separate scan step.
             </p>
             <p>
-              The operator workflow is straightforward: the iPad at each station shows what plate needs to go where. The operator picks up the plate (the SDS auto-detects departure), carries it to the destination, and places it down (the SDS auto-detects arrival and confirms identity). If they grab the wrong plate or go to the wrong station, the system blocks and tells them how to fix it.
+              The operator workflow follows naturally: CiCi shows what plate needs to go where. The operator picks up the plate (the dock detects departure), carries it to the destination, and places it down (the dock detects arrival and confirms identity). If they grab the wrong plate or go to the wrong station, the system blocks and tells them how to correct it.
             </p>
             <p>
-              This lets us validate the full workflow (sample intake, orchestration, instrument control, data collection, provenance) before investing in custom robotics. We prove the system works with humans, then swap in robots without redesigning anything.
+              When robots eventually replace human transfers, the Standard Dock stays the same and the orchestrator's core logic stays the same. Only the thing moving the plate changes. This lets us validate the full workflow (sample intake, orchestration, instrument control, data collection, provenance) before investing in custom robotics.
             </p>
             <p>
-              These are early UI mockups of the iPad interface that guides operators through every step: receiving, task execution, and incident reporting.
+              The Standard Dock also supports non-standard labware. Tubes, deep-well plates, and custom containers sit in adapter bases that present the standard footprint. Everything enters the tracking system through the same path.
+            </p>
+            <p>
+              The mockups below are early ergonomic explorations of the operator interface. CiCi has since become the working implementation of this concept.
             </p>
 
             <figure>
-              <img class="media-img" src="content/ipad_receive_workflow.png" alt="iPad mockup -step-by-step receiving workflow for incoming sample shipments" />
+              <img class="media-img" src="content/nfc_qr_code.png" alt="Standard Dock CAD design for universal plate interface" />
             </figure>
             <figure>
-              <img class="media-img" src="content/ipad_tip_refill.png" alt="iPad mockup -task guidance for tip rack refill with from/to locations and instructions" />
+              <img class="media-img" src="content/ipad_receive_workflow.png" alt="Operator interface concept for incoming sample receiving workflow" />
             </figure>
             <figure>
-              <img class="media-img" src="content/ipad_incident_report.png" alt="iPad mockup -incident reporting for issues the system can't detect automatically" />
+              <img class="media-img" src="content/ipad_tip_refill.png" alt="Operator interface concept for guided tip rack refill" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/ipad_incident_report.png" alt="Operator interface concept for incident reporting" />
             </figure>
           </article>
 
@@ -258,36 +203,36 @@
                 <span class="tag">Lab Automation</span>
               </div>
             </div>
-            <h3 class="post-title">The Orchestrator</h3>
+            <h3 class="post-title">The Orchestrator (Mockup)</h3>
 
-            <p>The orchestrator is the software brain that runs the lab.</p>
+            <p>The orchestrator is the software layer that runs the lab.</p>
             <p>
-              It schedules work, tracks every plate, commands every instrument, and collects all data. It's event-driven: it builds its understanding of the lab entirely from sensor telemetry: SDS events, instrument status reports, position updates, environmental monitors. It sends commands down and receives events back up. It doesn't assume a plate has moved until sensors confirm it.
+              It schedules work, tracks every plate, commands every instrument, and collects all data. It's event-driven: it builds its understanding of the lab entirely from sensor telemetry (dock events, instrument status reports, position updates, environmental monitors). It sends commands down and receives events back up. It doesn't assume a plate has moved until sensors confirm it.
             </p>
             <p>
-              At the center is a world model: the orchestrator's real-time picture of the entire lab state. Robot locations, instrument status, plate positions, resource reservations, everything. Every scheduling decision is made from this model. If it detects an inconsistency (a plate appearing where none should be) it halts new dispatches and alerts the operator.
+              At the center is a world model: the orchestrator's real-time picture of the entire lab state. Robot locations, instrument status, plate positions, resource reservations, everything. Every scheduling decision is made from this model. The orchestrator is always looking for the next action that progresses an experiment: if an instrument is idle and a plate is ready, it dispatches. If it detects an inconsistency (a plate appearing where none should be), it halts new dispatches and alerts the operator.
             </p>
             <p>
-              The execution loop runs continuously: update the world model from telemetry, find steps that are ready, reserve resources, dispatch tasks, monitor for completions and failures, advance experiment state. Multiple experiments run concurrently. While one plate is on the liquid handler, another can be retrieved from storage, and a third can be moving to the plate reader.
+              Multiple experiments run concurrently. While one plate is on the liquid handler, another can be retrieved from storage, and a third can be moving to the plate reader. A proof-of-concept version of this orchestrator is running against our lab simulation today, validating scheduling logic and resource contention handling.
             </p>
             <p>
-              The same orchestrator code runs against both our simulation and physical hardware. The telemetry interface is the abstraction boundary. We validate logic and failure scenarios in simulation, then connect to real equipment without changing the orchestrator.
+              The same orchestrator code will run against both our simulation and physical hardware. The telemetry interface is the abstraction boundary. We validate logic and failure scenarios in simulation, then connect to real equipment without changing the orchestrator.
             </p>
             <p>
-              Every action is recorded in an immutable, tamper-evident audit trail from day one. Not a future compliance feature, a launch requirement. Every plate transfer, every protocol execution, every fault, every human intervention is timestamped and attributed to a specific actor, whether that's a human operator identified by badge or a system component. The result is complete provenance: for any piece of data the lab produces, you can trace exactly how it was generated, which instruments touched it, who handled it, and what happened along the way.
+              Every action is recorded in an immutable, tamper-evident audit trail from day one. Not a future compliance feature, a launch requirement. Every plate transfer, every protocol execution, every fault, every human intervention is timestamped and attributed to a specific actor, whether that's a human operator or a system component. The result is complete provenance: for any piece of data the lab produces, you can trace exactly how it was generated, which instruments touched it, who handled it, and what happened along the way.
             </p>
             <p>
-              These are early UI mockups of the command center, the web dashboard where operators and engineers monitor the lab in real time.
+              The mockups below are ergonomic explorations of the command center, the web dashboard where operators and engineers will monitor the lab in real time.
             </p>
 
             <figure>
-              <img class="media-img" src="content/orchestrator_overview.png" alt="Command center mockup -instrument status, storage, staging stations, and active experiments at a glance" />
+              <img class="media-img" src="content/orchestrator_overview.png" alt="Command center concept showing instrument status, storage, staging stations, and active experiments" />
             </figure>
             <figure>
-              <img class="media-img" src="content/orchestrator_alerts.png" alt="Command center mockup -tiered alerting with critical, warning, and info severity levels" />
+              <img class="media-img" src="content/orchestrator_alerts.png" alt="Command center concept for tiered alerting with critical, warning, and info severity levels" />
             </figure>
             <figure>
-              <img class="media-img" src="content/manual_audit_trail.png" alt="Command center mockup -immutable audit trail with actor attribution, plate-level tracking, and tamper-evident logging" />
+              <img class="media-img" src="content/manual_audit_trail.png" alt="Command center concept for immutable audit trail with actor attribution and plate-level tracking" />
             </figure>
           </article>
 
@@ -301,20 +246,22 @@
             </div>
             <h3 class="post-title">Lab Simulation</h3>
 
-            <p>We built the simulation to prove orchestration logic works before we touch hardware.</p>
+            <p>We built the simulation to prove orchestration logic before committing to hardware.</p>
             <p>
               It's a deterministic, tick-based engine that models the physical lab in software. Nodes (robots, stations, instruments) are small state machines that emit the same telemetry events as their physical counterparts. Because time advances in discrete ticks, we can reproduce exactly what happened from the same initial state and inputs. Same inputs, same outputs, every time.
             </p>
             <p>
-              The simulation runs at configurable speed: 1x for real-time observation, 10x or 100x for rapid scenario coverage. This lets us test hundreds of workflow variations in the time it would take to run one physical experiment.
+              The simulation runs at configurable speed: 1x for real-time observation, 10x or 100x for rapid scenario coverage. We've run complete 100-plate sequences start to finish with performance holding steady, and we use accelerated runs to cover workflow variations in the time it would take to run one physical experiment.
             </p>
             <p>
               The orchestrator connects to the simulation over the same interface it will use with real hardware. It doesn't know or care whether it's talking to a simulation or physical equipment. That means every orchestration bug we find in simulation is a real bug we caught before it reached the lab.
             </p>
             <p>
-              We inject faults on purpose (instrument failures, plate misidentification, command timeouts) to validate recovery behavior while it's cheap to fix. The fault handling logic we write for simulation is the same logic that runs in production.
+              This has already paid off. Coordinating batches of nodes surfaced race conditions in resource reservation that would have been painful and expensive to debug on physical hardware. Working these out in simulation, where we can replay scenarios deterministically, is exactly the kind of technical de-risking that keeps the project moving forward efficiently.
             </p>
-            <p>Next up is expanding scenario coverage and validating multi-experiment throughput so we understand bottlenecks before they become hardware problems.</p>
+            <p>
+              We inject faults on purpose (instrument failures detected through heartbeat timeouts) to validate recovery behavior while it's cheap to fix. The fault handling logic we write for simulation is the same logic that runs in production.
+            </p>
 
             <video class="media-video" controls preload="metadata">
               <source src="content/multi_sim.mp4" type="video/mp4" />
@@ -324,47 +271,10 @@
               <img class="media-img" src="content/sim_screenshot_1.png" alt="Simulation UI showing active workflow with robot positions and instrument status" />
             </figure>
             <figure>
-              <img class="media-img" src="content/faulted.png" alt="Faulted state - the orchestrator detects and flags instrument failures" />
+              <img class="media-img" src="content/faulted.png" alt="Faulted state detection and flagging during simulated instrument failure" />
             </figure>
             <figure>
-              <img class="media-img" src="content/metrics.png" alt="Runtime metrics dashboard tracking throughput and timing across runs" />
-            </figure>
-          </article>
-
-          <article class="post timeline-card" id="post-protein-dojo" data-tags="robotics" data-date="Jan 15, 2026">
-            <div class="timeline-meta">
-              <span class="timeline-dot"></span>
-              <div class="meta">
-                <span class="date">Jan 15, 2026</span>
-                <span class="tag">Protein Dojo</span>
-              </div>
-            </div>
-            <h3 class="post-title">Protein Dojo</h3>
-            <a class="pill-link" href="https://www.proteindojo.com/" target="_blank" rel="noopener">proteindojo.com</a>
-
-            <p>Protein Dojo is a hands-on tool for iterating on protein binder designs.</p>
-            <p>
-              For small teams iterating on binders, the difference is loop speed: get to a concrete design decision quickly, with enough feedback to learn what actually changed.
-            </p>
-            <p>
-              Under the hood it's grounded in real structures.
-              You can explore an actual complex (e.g. SARS&#x2011;CoV&#x2011;2 Spike RBD bound to human ACE2) pulled from the PDB, then design against a specific interface.
-            </p>
-            <p>
-              The workflow follows a clear loop: Explore, Design, Evaluate, Submit.
-              You can move between 3D geometry and residue-level sequence changes without losing context.
-            </p>
-            <p>
-              The evaluation loop is the teacher.
-              Make a change, re-evaluate, and see why it helped or hurt: clashes, polarity, surface complementarity, and whether the design still looks physically plausible.
-            </p>
-            <p>Next up is tightening the evaluation signal so iteration feels even more like engineering and less like guesswork.</p>
-
-            <figure>
-              <img class="media-img" src="content/protein_dojo.png" alt="Protein Dojo 3D viewer showing protein structure with binding interface" />
-            </figure>
-            <figure>
-              <img class="media-img" src="content/dojo2.png" alt="Protein Dojo evaluation panel with design metrics" />
+              <img class="media-img" src="content/metrics.png" alt="Runtime metrics dashboard tracking throughput and timing across simulation runs" />
             </figure>
           </article>
 
@@ -373,24 +283,24 @@
               <span class="timeline-dot"></span>
               <div class="meta">
                 <span class="date">Jan 3, 2026</span>
-                <span class="tag">Rail Robot - Holiday Hackathon</span>
+                <span class="tag">Transport System Prototype</span>
               </div>
             </div>
-            <h3 class="post-title">A First End-To-End Demo</h3>
-            <p>The cart picks up a plate, rides the rail, and drops it off. End to end.</p>
+            <h3 class="post-title">First End-To-End Transfer</h3>
+
+            <p>The cart picks up a plate, rides the rail, and places it at the destination station. End to end.</p>
             <p>
-              This started as a holiday hackathon build.
-              The point was to prove we can go from sketch to mechanism to control loop to repeatable motion quickly, then iterate toward robustness. This is how we prototype: build the simplest version that exercises the full loop, then harden.
+              The goal was to get the full transfer loop working: pick up, travel, place down, return. Two stations, a lift, and one controller sequencing the whole operation. We wanted to see the complete cycle running so we could evaluate the mechanism, the control logic, and the failure modes all at once.
             </p>
             <p>
-              The demo is simple on purpose: two stations, a lift, and one controller loop sequencing the whole operation.
-              That simplicity is useful because it makes changes legible: update one variable (mechanism, tuning, software) and you immediately see the effect.
+              The vertical lift mechanism turned out to be a weak point. It worked, but not reliably enough to run unattended. That was a valuable finding: it pushed our thinking toward a single-plane transport model where everything moves laterally on one level, avoiding the complexity and failure modes of vertical motion entirely. Simpler mechanics, fewer degrees of freedom, more predictable behavior.
             </p>
             <p>
-              Under the hood it's one SBC running a tight C++ loop: generate step pulses, shape acceleration so motion stays smooth, and sequence a station state machine.
-              We're light on sensors right now so we can pin down the fundamentals before adding complexity.
+              Under the hood it's one SBC running a tight C++ loop: generate step pulses, shape acceleration for smooth motion, and sequence a station state machine. Repeatability was the primary concern. We added sensor-based position confirmation so the cart stops at the same place every run, and built the state machine to handle edge cases gracefully. The goal was a system that could run for hours unattended with enough protection logic to keep things safe.
             </p>
-            <p>Next up is adding feedback without losing simplicity: minimal sensors, clear failure modes, and a safer stop-everything path.</p>
+            <p>
+              Our prototyping philosophy: get the first proof of concept running with a clear vision for where it's headed, then harden. Every prototype surfaces design considerations you didn't anticipate, and the earlier you find them, the cheaper they are to address.
+            </p>
 
             <video class="media-video" controls preload="metadata">
               <source src="content/speed_test_place_h264.mp4" type="video/mp4" />
@@ -403,21 +313,21 @@
               <span class="timeline-dot"></span>
               <div class="meta">
                 <span class="date">Dec 26, 2025</span>
-                <span class="tag">Rail Robot - Holiday Hackathon</span>
+                <span class="tag">Transport System Prototype</span>
               </div>
             </div>
-            <h3 class="post-title">Getting The Rail Moving Fast</h3>
+            <h3 class="post-title">Pushing Prototypes to Breaking Points</h3>
 
-            <p>We pushed rail speed until things started breaking to understand where the mechanical limits actually are.</p>
+            <p>We ran the rail at increasing speeds to find where the mechanical constraints are (especially with 3D printed parts).</p>
             <p>
-              The constraint shows up quickly: aggressive acceleration creates torque that can lift the cart off the track, so mechanical design and packaging are the next wins.
+              The limit showed up quickly: aggressive acceleration creates enough torque to lift the cart off the track. That tells us exactly where to focus the next mechanical iteration: mass distribution, clamping force, and packaging.
             </p>
             <p>
-              On the control side we split responsibilities:
-              a low-level stepper controller generates the pulse train and handles accel/decel ramps, while a higher-level position controller runs the station state machine.
-              That separation keeps timing predictable and makes it clear where to add feedback later.
+              On the control side, we split responsibilities into two layers: a low-level stepper controller generates the pulse train and handles acceleration ramps, while a higher-level position controller runs the station state machine. This separation was partly forced by the compute hardware. Running precise GPIO timing within Linux pushed us to evaluate whether production will need a dedicated real-time controller (something like an STM32) for the motion layer. Another example of how building early prototypes surfaces questions you wouldn't think to ask on paper.
             </p>
-            <p>Next up is tightening the mechanical envelope (torque, clamping, mass distribution) so software can safely ask for more speed.</p>
+            <p>
+              The real goal was repeatability: running the system continuously and confirming that sensor-based position detection keeps the cart landing in the same spot every time, across hundreds of cycles.
+            </p>
 
             <video class="media-video" controls preload="metadata">
               <source src="content/speed_test.mp4" type="video/mp4" />
@@ -430,58 +340,58 @@
               <span class="timeline-dot"></span>
               <div class="meta">
                 <span class="date">Dec 21, 2025</span>
-                <span class="tag">Rail Robot - Holiday Hackathon</span>
+                <span class="tag">Transport System Prototype</span>
               </div>
             </div>
-            <h3 class="post-title">Building The Rail Robot</h3>
+            <h3 class="post-title">Building The Transport Prototype</h3>
 
-            <p>We built a complete rail robot prototype in two weeks over the holidays, from napkin sketches to moving hardware.</p>
+            <p>We built a complete rail-based transport prototype in two weeks, from concept sketches to moving hardware.</p>
             <p>
-              The idea was simple: move plates like a tiny factory line instead of a fancy robot arm. Buy metal rails, suspend them on printed stands, keep the cart's top surface dedicated to holding a plate. Everything else (controller, actuators, lift) hangs underneath so stations can overhang the track and the cart can deposit and pick up without extra mechanisms at each station.
+              The core idea: move plates along a linear rail instead of using a robotic arm. Metal rails suspended on printed stands, with the cart's top surface dedicated to holding a plate. Everything else (controller, actuators, lift) hangs underneath so stations can overhang the track and the cart can deposit and retrieve without extra mechanisms at each position.
             </p>
 
             <figure>
-              <img class="media-img" src="content/sketch1.png" alt="Initial concept sketch -cart and rail layout" />
+              <img class="media-img" src="content/sketch1.png" alt="Concept sketch for cart and rail layout" />
             </figure>
             <figure>
-              <img class="media-img" src="content/sketch2.png" alt="Early lift mechanism sketch with spooling concept" />
-            </figure>
-
-            <p>
-              We modeled the full mechanism in CAD before printing anything to catch interference, bad load paths, and packaging mistakes before the physical pile-up on the bench. The rails and bearing wheels are the only fixed parts; almost everything else is printable. Building the system as sub-assemblies made it easier to reason about actuator placement, gear rail location, and clearances before committing to a layout.
-            </p>
-
-            <figure>
-              <img class="media-img" src="content/cad1.png" alt="CAD assembly -complete rail robot" />
-            </figure>
-            <figure>
-              <img class="media-img" src="content/cad2.png" alt="CAD detail -cart mechanism and lift" />
-            </figure>
-            <figure>
-              <img class="media-img" src="content/cad3.png" alt="CAD exploded view showing sub-assemblies" />
+              <img class="media-img" src="content/sketch2.png" alt="Lift mechanism sketch with spooling concept" />
             </figure>
 
             <p>
-              The lift mechanism went through two iterations. The first scissor lift looked fine in CAD but flexed too much in the printed assembly and loaded the plastic in the wrong ways. We replaced it with a compact servo-driven cam lift. Stiffer, simpler to tune, and a better base for adding position feedback later.
+              We modeled the full mechanism in CAD before printing anything to catch interference, bad load paths, and packaging mistakes early. The rails and bearing wheels are the only off-the-shelf parts; nearly everything else is 3D-printable. Building the system as sub-assemblies made it easier to reason about actuator placement, gear rail location, and clearances before committing to a layout.
             </p>
 
             <figure>
-              <img class="media-img" src="content/cam_lift.png" alt="Cam lift mechanism -compact servo-driven design" />
+              <img class="media-img" src="content/cad1.png" alt="Complete rail transport CAD assembly" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/cad2.png" alt="Cart mechanism and lift detail" />
+            </figure>
+            <figure>
+              <img class="media-img" src="content/cad3.png" alt="Exploded view showing sub-assemblies" />
+            </figure>
+
+            <p>
+              The lift mechanism went through two iterations. The first scissor lift looked fine in CAD but the printed parts flexed too much at the tolerances our printer could achieve. The material and part scale didn't support the design. We replaced it with a compact servo-driven cam lift that proved stiffer, simpler to tune, and a better foundation for adding position feedback later.
+            </p>
+
+            <figure>
+              <img class="media-img" src="content/cam_lift.png" alt="Servo-driven cam lift mechanism" />
             </figure>
             <figure>
               <img class="media-img" src="content/plate_holding.jpg" alt="Cam lift holding a plate in raised position" />
             </figure>
 
             <p>
-              Stations are landing pads that make plate placement predictable: when the cart arrives, the plate lands in the same place every time. This is the early physical prototype for what became our Standard Docking System concept. The same principle now drives every plate position in the lab architecture.
+              The station design was an early physical prototype of what became our Standard Dock concept: a universal interface that makes plate placement predictable and repeatable. When the cart arrives, the plate lands in the same position every time. The same principle now drives every plate position in the lab architecture.
             </p>
 
             <figure>
-              <img class="media-img" src="content/simple_station.png" alt="3D-printed station prototype with guiding lip for repeatable plate placement" />
+              <img class="media-img" src="content/simple_station.png" alt="Station prototype with guiding geometry for repeatable plate placement" />
             </figure>
 
             <p>
-              We also learned that wiring is a design problem, not an afterthought. Moving from breadboard to perfboard with proper headers and routing eliminated a whole class of debugging headaches. Suspending the stepper phase wires above the rail immediately forces the right production questions (tethered cart vs. power-from-rail, where the controller should live) while keeping the demo simple.
+              One of the less obvious lessons: wiring is a design problem, not an afterthought. Our first pass skipped header pins on the perfboard, which made troubleshooting and modifications unnecessarily difficult. Purpose-built modules with clear scope boundaries (this board does one thing, that connector goes one place) eliminated a class of integration headaches. Thinking in terms of "what if I need to change this later" from the start saves real time downstream.
             </p>
 
             <figure>
